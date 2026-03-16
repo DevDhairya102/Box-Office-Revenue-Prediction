@@ -15,7 +15,7 @@
 Accurately forecasting box office revenue is a challenging task due to the complex interplay of artistic, financial, and audience-driven factors.
 This project introduces an **ensemble-based learning framework** that combines **feature engineering** and **rigorous evaluation** to improve predictive accuracy.
 Using a dataset of **4,880 films**, multiple machine learning algorithms—Linear, Ridge, Lasso, Random Forest, and Gradient Boosting—were tested.
-The **Gradient Boosting model** achieved the best results, explaining **76.4% of the variance (R² = 0.7639)** in box office revenue.
+The Gradient Boosting model achieved the best results, explaining **76.4% of the variance (R² = 0.7639)** in box office revenue.
 This repository provides all code, data pipelines, and analysis supporting the study.
 
 ---

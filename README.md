@@ -1,6 +1,6 @@
 # Box Office Revenue Prediction: An Ensemble Learning Approach with Feature Engineering and Comprehensive Evaluation
 
-**Author:** Aaryan Lunis 
+**Author:** Dhairya Shah
 
 **Institution:** Department of Computer Engineering, Mukesh Patel School of Technology Management & Engineering, SVKM’s NMIMS, Mumbai, India
 

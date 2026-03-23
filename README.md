@@ -152,6 +152,6 @@ Lunis, A. (2025). Box Office Revenue Prediction: An Ensemble Learning Approach w
 
 **Aaryan Lunis**
 Email: [lunisaaryan@gmail.com](mailto:lunisaaryan@gmail.com)
-LinkedIn: [linkedin.com/in/aaryan-lunis](https://linkedin.com/in/aaryan-lunis)
+LinkedIn: 
 
 ---

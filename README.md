@@ -143,7 +143,7 @@ This project is released under the **MIT License** — free to use, modify, and 
 If you use this work in your research or projects, please cite:
 
 ```
-Lunis, A. (2025). Box Office Revenue Prediction: An Ensemble Learning Approach with Feature Engineering and Comprehensive Evaluation. GitHub Repository. https://github.com/Aaryan-Lunis/Box-Office-Revenue-Prediction
+ Box Office Revenue Prediction: An Ensemble Learning Approach with Feature Engineering and Comprehensive Evaluation. GitHub Repository. https://github.com/DevDhairya102/Box-Office-Revenue-Prediction
 ```
 
 ---

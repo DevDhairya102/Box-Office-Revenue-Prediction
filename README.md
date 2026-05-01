@@ -150,7 +150,7 @@ If you use this work in your research or projects, please cite:
 
 ## 📩 Contact
 
-**Dhairya Shah**
+Name: **Dhairya Shah**
 Email: 
 LinkedIn: 
 

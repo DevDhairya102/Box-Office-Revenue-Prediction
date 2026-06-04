@@ -151,7 +151,7 @@ If you use this work in your research or projects, please cite:
 ## 📩 Contact
 
 Name: **Dhairya Shah**
-Email: 
+Email: **dhairyamihir2005@gmail.com**
 LinkedIn: 
 
 ---

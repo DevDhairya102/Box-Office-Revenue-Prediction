@@ -10,7 +10,7 @@
 
 ---
 
-## 📘 Abstract
+## Abstract
 
 Accurately forecasting box office revenue is a challenging task due to the complex interplay of artistic, financial, and audience-driven factors.
 This project introduces an **ensemble-based learning framework** that combines **feature engineering** and **rigorous evaluation** to improve predictive accuracy.

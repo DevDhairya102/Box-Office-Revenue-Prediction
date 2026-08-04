@@ -27,7 +27,7 @@ The study aims to assist producers, distributors, and marketing professionals in
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 
 ```
 Box-Office-Revenue-Prediction/

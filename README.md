@@ -20,7 +20,7 @@ This repository provides all code, data pipelines, and analysis supporting the s
 
 ---
 
-## 🧠 Research Objective
+## Research Objective
 
 To design and evaluate a **data-driven framework** that can predict movie box office revenue using engineered features and ensemble machine learning models.
 The study aims to assist producers, distributors, and marketing professionals in making informed investment and scheduling decisions.
@@ -50,7 +50,7 @@ Box-Office-Revenue-Prediction/
 
 ---
 
-## ⚙️ Methodology
+## Methodology
 
 ### 1. Dataset Description
 

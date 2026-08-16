@@ -99,7 +99,7 @@ Box-Office-Revenue-Prediction/
 
 ---
 
-## 🚀 How to Run the Project
+## How to Run the Project
 
 1. Clone this repository:
 
@@ -125,7 +125,7 @@ Box-Office-Revenue-Prediction/
 
 ---
 
-## 🔬 Future Work
+## Future Work
 
 * Integrate **multimodal learning** with trailers and posters using computer vision
 * Explore **transformer-based hybrid models** for sequential trend learning

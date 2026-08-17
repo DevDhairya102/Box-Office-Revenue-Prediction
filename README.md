@@ -75,7 +75,7 @@ Box-Office-Revenue-Prediction/
 
 ---
 
-## 📊 Results and Evaluation
+## Results and Evaluation
 
 | Model                 |   Test R²  | RMSE (in $M) | MAE (in $M) |
 | :-------------------- | :--------: | :----------: | :---------: |

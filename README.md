@@ -91,7 +91,7 @@ Box-Office-Revenue-Prediction/
 
 ---
 
-## 🔍 Key Insights
+### Key Insights
 
 * Ensemble models capture **non-linear interactions** between financial and audience factors.
 * **Feature engineering** significantly enhances model interpretability.

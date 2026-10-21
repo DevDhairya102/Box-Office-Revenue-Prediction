@@ -3,23 +3,5 @@
   "r2_score": 0.7639,
   "rmse": 93678947,
   "mae": 45100000,
-  "training_samples": 4880,
-  "features": [
-    "budget",
-    "runtime",
-    "vote_average",
-    "vote_count",
-    "popularity",
-    "release_year",
-    "release_month",
-    "primary_genre",
-    "lead_actor",
-    "director",
-    "production_company",
-    "release_season",
-    "budget_per_minute",
-    "vote_weighted_score",
-    "budget_log",
-    "popularity_log"
-  ]
+  "training_samples": 4880
 }

@@ -1,0 +1,3 @@
+movie_name,budget,runtime,primary_genre,lead_actor,director,production_company,release_year,release_month,vote_count,popularity,predicted_revenue,roi,created_at
+Avatar 3: The Seed Bearer,250000000.0,190.0,Action,Sam Worthington,James Cameron,20th Century Fox,2026,12,1200000,85.0,19339757.99,-0.9226,2026-10-21T14:24:40.128372
+Avatar 3: The Seed Bearer,250000000.0,190.0,Action,Sam Worthington,James Cameron,20th Century Fox,2026,12,1200000,85.0,481425527.69,0.9257,2026-10-21T14:26:00.514934

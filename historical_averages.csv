@@ -1,0 +1,24 @@
+primary_genre,lead_actor,director,production_company,vote_count,popularity,revenue,budget
+Action,Robert Downey Jr.,Anthony Russo,Walt Disney Pictures,1850000,85.4,2797800564,356000000
+Action,Tom Cruise,Christopher McQuarrie,Paramount Pictures,450000,42.1,791657398,178000000
+Action,Keanu Reeves,Chad Stahelski,Lionsgate,380000,38.5,432000000,100000000
+Adventure,Chris Pratt,Colin Trevorrow,Universal Pictures,820000,48.2,1671537444,150000000
+Science Fiction,Leonardo DiCaprio,Christopher Nolan,Warner Bros.,1600000,72.8,836836967,160000000
+Drama,Cillian Murphy,Christopher Nolan,Universal Pictures,750000,58.2,957000000,100000000
+Drama,Brad Pitt,David Fincher,20th Century Fox,1200000,45.0,101209702,63000000
+Animation,Tom Hanks,Lee Unkrich,Walt Disney Pictures,600000,35.0,1066969703,200000000
+Comedy,Ryan Reynolds,Shawn Levy,20th Century Fox,650000,46.0,331503757,120000000
+Horror,Vera Farmiga,James Wan,Warner Bros.,480000,32.0,319500000,20000000
+Thriller,Christian Bale,Christopher Nolan,Warner Bros.,1450000,68.0,1004558444,185000000
+Crime,Al Pacino,Francis Ford Coppola,Paramount Pictures,1300000,52.0,246120974,6000000
+Fantasy,Daniel Radcliffe,David Yates,Warner Bros.,980000,54.0,1341511219,125000000
+Romance,Ryan Gosling,Damien Chazelle,Lionsgate,620000,40.0,446100000,30000000
+Mystery,Daniel Craig,Rian Johnson,Lionsgate,550000,39.0,312900000,40000000
+Action,Any,Any,Any,120000,18.5,185000000,80000000
+Adventure,Any,Any,Any,110000,17.0,195000000,85000000
+Animation,Any,Any,Any,85000,14.5,170000000,75000000
+Comedy,Any,Any,Any,45000,9.8,65000000,30000000
+Drama,Any,Any,Any,38000,8.5,45000000,25000000
+Horror,Any,Any,Any,52000,11.2,58000000,15000000
+Science Fiction,Any,Any,Any,135000,20.1,210000000,90000000
+Thriller,Any,Any,Any,55000,10.5,68000000,28000000

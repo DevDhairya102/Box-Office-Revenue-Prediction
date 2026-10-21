@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Office Revenue Predictor</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glow {
+            box-shadow: 0 0 25px -5px rgba(59, 130, 246, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen antialiased flex flex-col">
+
+    <!-- Top Navigation -->
+    <header class="border-b border-slate-800 bg-slate-900/60 sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl">🎬</span>
+                <span class="font-extrabold text-lg sm:text-xl tracking-tight bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">
+                    Box Office Revenue Predictor
+                </span>
+            </div>
+            
+            <!-- Backend URL Configuration -->
+            <div class="flex items-center space-x-2">
+                <label for="apiUrlInput" class="text-xs text-slate-400 hidden sm:inline">Backend API:</label>
+                <input id="apiUrlInput" type="text" value="http://127.0.0.1:8000" 
+                    placeholder="https://your-app.onrender.com"
+                    class="bg-slate-800 border border-slate-700 text-xs rounded-lg px-2.5 py-1.5 w-44 sm:w-60 focus:outline-none focus:border-blue-500 transition">
+                <button onclick="testConnection()" class="bg-blue-600 hover:bg-blue-500 text-xs px-2.5 py-1.5 rounded-lg font-medium transition">
+                    Test
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Left: Prediction Form (7 cols) -->
+        <div class="lg:col-span-7 space-y-6">
+            <div class="glass p-6 sm:p-8 rounded-2xl shadow-xl">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
+                    <div>
+                        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                            <span>🎥</span> Movie Details
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-0.5">Enter production details to estimate worldwide box office gross</p>
+                    </div>
+                    <span class="text-xs px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium">
+                        Gradient Boosting (R² = 0.76)
+                    </span>
+                </div>
+
+                <form id="predictionForm" onsubmit="handlePredict(event)" class="space-y-4">
+                    <!-- Movie Title -->
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Movie Title</label>
+                        <input id="movie_name" type="text" required placeholder="e.g. Inception, Avatar, Dune"
+                            class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none transition">
+                    </div>
+
+                    <!-- Budget & Runtime -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Budget ($ USD)</label>
+                            <input id="budget" type="number" min="10000" step="100000" required value="75000000"
+                                class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Runtime (Minutes)</label>
+                            <input id="runtime" type="number" min="40" max="360" required value="125"
+                                class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none transition">
+                        </div>
+                    </div>
+
+                    <!-- Primary Genre & Production Company -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Primary Genre</label>
+                            <select id="primary_genre" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none transition">
+                                <option value="Action" selected>Action</option>
+                                <option value="Adventure">Adventure</option>
+                                <option value="Animation">Animation</option>
+                                <option value="Comedy">Comedy</option>
+                                <option value="Crime">Crime</option>
+                                <option value="Drama">Drama</option>
+                                <option value="Family">Family</option>
+                                <option value="Fantasy">Fantasy</option>
+                                <option value="Horror">Horror</option>
+                                <option value="Mystery">Mystery</option>
+                                <option value="Romance">Romance</option>
+                                <option value="Science Fiction">Science Fiction</option>
+                                <option value="Thriller">Thriller</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Production Studio</label>
+                            <select id="production_company" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none transition">
+                                <option value="Warner Bros." selected>Warner Bros.</option>
+                                <option value="Walt Disney Pictures">Walt Disney Pictures</option>
+                                <option value="Universal Pictures">Universal Pictures</option>
+                                <option value="Paramount Pictures">Paramount Pictures</option>
+                                <option value="20th Century Fox">20th Century Fox</option>
+                                <option value="Sony Pictures">Sony Pictures</option>
+                                <option value="Lionsgate">Lionsgate</option>
+                                <option value="Independent">Independent</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Lead Actor & Director -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Lead Actor</label>
+                            <input id="lead_actor" type="text" required value="Leonardo DiCaprio"
+                                class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Director</label>
+                            <input id="director" type="text" required value="Christopher Nolan"
+                                class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none transition">
+                        </div>
+                    </div>
+
+                    <!-- Release Date -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Release Year</label>
+                            <input id="release_year" type="number" min="1980" max="2035" required value="2026"
+                                class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">Release Month (1-12)</label>
+                            <select id="release_month" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none transition">
+                                <option value="1">January (Winter)</option>
+                                <option value="2">February (Winter)</option>
+                                <option value="3">March (Spring)</option>
+                                <option value="4">April (Spring)</option>
+                                <option value="5">May (Summer Kickoff)</option>
+                                <option value="6">June (Summer Peak)</option>
+                                <option value="7" selected>July (Summer Blockbuster)</option>
+                                <option value="8">August (Summer)</option>
+                                <option value="9">September (Fall)</option>
+                                <option value="10">October (Fall/Halloween)</option>
+                                <option value="11">November (Holiday Kickoff)</option>
+                                <option value="12">December (Holiday Peak)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Engagement metrics (Vote count & Popularity) -->
+                    <div class="border-t border-slate-800 pt-3">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Audience Engagement Metrics</span>
+                            <button type="button" onclick="autoEstimateEngagement()" class="text-xs text-blue-400 hover:text-blue-300 underline font-medium">
+                                Auto-Fill from Historical Averages
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">Estimated Vote Count</label>
+                                <input id="vote_count" type="number" min="10" max="3000000" value="150000"
+                                    class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm focus:border-blue-500 focus:outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1">Popularity Index (1 - 100)</label>
+                                <input id="popularity" type="number" step="0.1" min="0.1" max="1000" value="28.5"
+                                    class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm focus:border-blue-500 focus:outline-none transition">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submitBtn"
+                        class="w-full mt-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg glow transition duration-200 flex items-center justify-center space-x-2">
+                        <span>Predict Box Office Revenue</span>
+                        <span id="spinner" class="hidden">⏳</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Right: Prediction Results & History (5 cols) -->
+        <div class="lg:col-span-5 space-y-6">
+            
+            <!-- Result Card -->
+            <div id="resultCard" class="glass p-6 sm:p-8 rounded-2xl shadow-xl border-blue-500/30">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Prediction Output</h3>
+                
+                <div id="noPredictionPlaceholder" class="text-center py-12 text-slate-500">
+                    <p class="text-4xl mb-3">📊</p>
+                    <p class="text-sm">Enter movie parameters and click <br><strong class="text-slate-300">Predict Box Office Revenue</strong></p>
+                </div>
+
+                <div id="predictionResult" class="hidden space-y-5">
+                    <div>
+                        <span class="text-xs text-slate-400">Estimated Global Box Office</span>
+                        <div class="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-300 mt-1" id="predictedRevenueText">
+                            $0.00
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 pt-2">
+                        <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800">
+                            <span class="text-xs text-slate-400 block">Expected ROI</span>
+                            <span id="roiText" class="text-lg font-bold text-white">0%</span>
+                        </div>
+                        <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800">
+                            <span class="text-xs text-slate-400 block">Verdict</span>
+                            <span id="verdictBadge" class="text-xs font-bold px-2 py-1 rounded inline-block mt-1 bg-green-500/20 text-green-300">
+                                Profitable
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Supabase sync notice -->
+                    <div id="supabaseNotice" class="text-xs bg-slate-900 p-2.5 rounded-lg border border-slate-800 text-slate-400 flex items-center space-x-2">
+                        <span>⚡</span>
+                        <span id="syncStatus">Synced to Supabase database</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Predictions Log -->
+            <div class="glass p-6 rounded-2xl shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">Recent Predictions</h3>
+                    <button onclick="loadPredictionHistory()" class="text-xs text-blue-400 hover:text-blue-300">Refresh</button>
+                </div>
+                <div id="historyList" class="space-y-2.5 max-h-72 overflow-y-auto pr-1">
+                    <p class="text-xs text-slate-500 text-center py-4">No recent predictions found.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-900 bg-slate-950 py-4 text-center text-xs text-slate-500">
+        Box Office Revenue Prediction System • FastAPI • Supabase • Render • Vercel
+    </footer>
+
+    <!-- Logic Script -->
+    <script>
+        function getApiUrl() {
+            let url = document.getElementById('apiUrlInput').value.trim();
+            if (url.endsWith('/')) url = url.slice(0, -1);
+            return url;
+        }
+
+        async function testConnection() {
+            const baseUrl = getApiUrl();
+            try {
+                const res = await fetch(`${baseUrl}/health`);
+                const data = await res.json();
+                if (data.status === 'healthy' || data.status === 'ok') {
+                    alert(`Connection successful! Backend is online: ${data.message || 'Ready'}`);
+                } else {
+                    alert(`Received response from backend: ${JSON.stringify(data)}`);
+                }
+            } catch (err) {
+                alert(`Could not connect to backend at ${baseUrl}.\nEnsure FastAPI is running and CORS is enabled.`);
+            }
+        }
+
+        function autoEstimateEngagement() {
+            const genre = document.getElementById('primary_genre').value;
+            const budget = parseFloat(document.getElementById('budget').value) || 50000000;
+            
+            // Heuristic estimation
+            let baseVotes = 45000;
+            let basePop = 12.0;
+
+            if (genre === 'Action' || genre === 'Science Fiction' || genre === 'Adventure') {
+                baseVotes = Math.round((budget / 1000000) * 2200);
+                basePop = +(Math.log10(budget) * 5.2).toFixed(1);
+            } else if (genre === 'Horror') {
+                baseVotes = 55000;
+                basePop = 14.5;
+            } else {
+                baseVotes = Math.round((budget / 1000000) * 1100);
+                basePop = +(Math.log10(budget) * 3.5).toFixed(1);
+            }
+
+            document.getElementById('vote_count').value = Math.max(1000, baseVotes);
+            document.getElementById('popularity').value = Math.max(2.0, basePop);
+        }
+
+        async function handlePredict(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submitBtn');
+            const spinner = document.getElementById('spinner');
+            submitBtn.disabled = true;
+            spinner.classList.remove('hidden');
+
+            const payload = {
+                movie_name: document.getElementById('movie_name').value,
+                budget: parseFloat(document.getElementById('budget').value),
+                runtime: parseFloat(document.getElementById('runtime').value),
+                primary_genre: document.getElementById('primary_genre').value,
+                production_company: document.getElementById('production_company').value,
+                lead_actor: document.getElementById('lead_actor').value,
+                director: document.getElementById('director').value,
+                release_year: parseInt(document.getElementById('release_year').value),
+                release_month: parseInt(document.getElementById('release_month').value),
+                vote_count: parseInt(document.getElementById('vote_count').value),
+                popularity: parseFloat(document.getElementById('popularity').value),
+                vote_average: 6.5
+            };
+
+            const baseUrl = getApiUrl();
+
+            try {
+                const res = await fetch(`${baseUrl}/predict`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!res.ok) {
+                    const errData = await res.json().catch(() => ({}));
+                    throw new Error(errData.detail || `Server error: ${res.status}`);
+                }
+
+                const data = await res.json();
+                displayResult(data);
+                loadPredictionHistory();
+            } catch (err) {
+                alert(`Prediction error: ${err.message}`);
+            } finally {
+                submitBtn.disabled = false;
+                spinner.classList.add('hidden');
+            }
+        }
+
+        function displayResult(data) {
+            document.getElementById('noPredictionPlaceholder').classList.add('hidden');
+            const resultDiv = document.getElementById('predictionResult');
+            resultDiv.classList.remove('hidden');
+
+            const rev = data.predicted_revenue;
+            document.getElementById('predictedRevenueText').innerText = `$${rev.toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+            
+            const roi = data.roi !== undefined ? (data.roi * 100).toFixed(1) : '0';
+            const roiEl = document.getElementById('roiText');
+            roiEl.innerText = `${roi}%`;
+
+            const verdictEl = document.getElementById('verdictBadge');
+            if (data.roi > 1.0) {
+                verdictEl.innerText = "Blockbuster Hit";
+                verdictEl.className = "text-xs font-bold px-2 py-1 rounded inline-block mt-1 bg-emerald-500/20 text-emerald-300";
+            } else if (data.roi > 0) {
+                verdictEl.innerText = "Profitable";
+                verdictEl.className = "text-xs font-bold px-2 py-1 rounded inline-block mt-1 bg-blue-500/20 text-blue-300";
+            } else {
+                verdictEl.innerText = "Underperformed";
+                verdictEl.className = "text-xs font-bold px-2 py-1 rounded inline-block mt-1 bg-red-500/20 text-red-300";
+            }
+
+            document.getElementById('syncStatus').innerText = data.supabase_logged 
+                ? "Saved to Supabase database" 
+                : "Logged locally";
+        }
+
+        async function loadPredictionHistory() {
+            const baseUrl = getApiUrl();
+            const historyList = document.getElementById('historyList');
+            try {
+                const res = await fetch(`${baseUrl}/predictions`);
+                if (!res.ok) return;
+                const items = await res.json();
+                if (!items || items.length === 0) {
+                    historyList.innerHTML = '<p class="text-xs text-slate-500 text-center py-4">No recent predictions found.</p>';
+                    return;
+                }
+                historyList.innerHTML = items.slice(0, 10).map(item => `
+                    <div class="p-3 bg-slate-900/60 rounded-xl border border-slate-800/80 flex items-center justify-between text-xs">
+                        <div>
+                            <div class="font-bold text-slate-200">${item.movie_name || 'Untitled'}</div>
+                            <div class="text-slate-400 text-[11px]">${item.primary_genre || ''} • Budget: $${(item.budget / 1e6).toFixed(1)}M</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-bold text-emerald-400">$${(item.predicted_revenue / 1e6).toFixed(1)}M</div>
+                            <div class="text-[10px] text-slate-500">${item.created_at ? new Date(item.created_at).toLocaleDateString() : 'Recent'}</div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (e) {
+                console.log('History fetch notice:', e);
+            }
+        }
+
+        window.onload = () => {
+            loadPredictionHistory();
+        };
+    </script>
+</body>
+</html>

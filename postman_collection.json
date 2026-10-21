@@ -1,0 +1,141 @@
+{
+  "info": {
+    "_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "name": "Box Office Revenue Prediction API",
+    "description": "Postman Collection to test Box Office Revenue Prediction endpoints (Local & Render).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "2. Get Model Info",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/model-info",
+          "host": ["{{baseUrl}}"],
+          "path": ["model-info"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "3. Get Metadata (Genres & Studios)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/metadata",
+          "host": ["{{baseUrl}}"],
+          "path": ["metadata"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "4. Predict Revenue - Blockbuster Sci-Fi",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"movie_name\": \"Interstellar: Beyond\",\n  \"budget\": 165000000,\n  \"runtime\": 169,\n  \"primary_genre\": \"Science Fiction\",\n  \"lead_actor\": \"Matthew McConaughey\",\n  \"director\": \"Christopher Nolan\",\n  \"production_company\": \"Warner Bros.\",\n  \"release_year\": 2026,\n  \"release_month\": 7,\n  \"vote_count\": 850000,\n  \"popularity\": 65.4,\n  \"vote_average\": 7.8\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/predict",
+          "host": ["{{baseUrl}}"],
+          "path": ["predict"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "5. Predict Revenue - Indie Drama",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"movie_name\": \"The Quiet Room\",\n  \"budget\": 12000000,\n  \"runtime\": 108,\n  \"primary_genre\": \"Drama\",\n  \"lead_actor\": \"Paul Mescal\",\n  \"director\": \"Charlotte Wells\",\n  \"production_company\": \"Independent\",\n  \"release_year\": 2026,\n  \"release_month\": 10,\n  \"vote_count\": 45000,\n  \"popularity\": 12.3,\n  \"vote_average\": 7.1\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/predict",
+          "host": ["{{baseUrl}}"],
+          "path": ["predict"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "6. Predict Revenue - Horror / Thriller",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"movie_name\": \"Shadow House\",\n  \"budget\": 18000000,\n  \"runtime\": 98,\n  \"primary_genre\": \"Horror\",\n  \"lead_actor\": \"Vera Farmiga\",\n  \"director\": \"James Wan\",\n  \"production_company\": \"Warner Bros.\",\n  \"release_year\": 2026,\n  \"release_month\": 10,\n  \"vote_count\": 120000,\n  \"popularity\": 28.0,\n  \"vote_average\": 6.8\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/predict",
+          "host": ["{{baseUrl}}"],
+          "path": ["predict"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "7. Get Recent Predictions (Supabase/DB)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/predictions?limit=10",
+          "host": ["{{baseUrl}}"],
+          "path": ["predictions"],
+          "query": [
+            {
+              "key": "limit",
+              "value": "10"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
